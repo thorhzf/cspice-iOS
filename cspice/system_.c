@@ -62,11 +62,11 @@
 #include "f2c.h"
 
 
-
+#include <stdio.h>
 
 
 // tootzoe testing
-#if 1
+#if 0
 
 integer system_(register char *s, ftnlen n) {
     return 0;
@@ -76,7 +76,7 @@ integer system_(register char *s, ftnlen n) {
 
 
 #ifdef KR_headers
-
+@#$%^&*
    extern char *F77_aloc();
 
    integer system_(s, n) register char *s; ftnlen n;
@@ -111,7 +111,25 @@ integer system_(register char *s, ftnlen n) {
       }
 
    *bp = 0;
+
+
+#if defined(__APPLE__)
+    #include <TargetConditionals.h>
+
+    #if TARGET_OS_IPHONE == 1
+        // iOS  physical device
+    // need to rerount to objc to do same cmd as system()....
+   printf("\n\ntootzoe :  need to rerount to objc to do same cmd as system()....\n\n");
+    #elif TARGET_OS_MAC == 1
+          rv  = system(buff);
+    #endif
+
+#else
    rv  = system(buff);
+#endif
+
+
+
 
    if (buff != buff0)
        {
